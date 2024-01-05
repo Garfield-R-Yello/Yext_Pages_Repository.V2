@@ -14,7 +14,9 @@ export interface ContactSectionProps {
 
 }
 
+
 const ContactSection = ({ address, phone, email, latitude, longitude, contactmessage }: ContactSectionProps) => {
+  
   return (
     <>
       <div className="relative px-14 py-14 mx-auto isolate bg-white" id="contact">
@@ -79,14 +81,16 @@ const ContactSection = ({ address, phone, email, latitude, longitude, contactmes
                     <span className="sr-only">Email</span>
                     <EnvelopeIcon className="h-7 w-6 text-gray-400" aria-hidden="true" />
                   </dt>
+                  
+
                   <dd>
-    {email && email.length > 0 ? (
-      <a className="hover:text-gray-900" href={`mailto:${email[0]}`}>
-        {email[0]}
-      </a>
-    ) : (
-      "No email available"
-    )}
+                  {email ? (
+  <a className="hover:text-gray-900" href={`mailto:${email}`}>
+    {email}
+  </a>
+) : (
+  "No email available"
+)}
   </dd>
                   
                 </div>
