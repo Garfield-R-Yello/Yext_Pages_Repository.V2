@@ -43,8 +43,8 @@ const LeadForm: React.FC<LeadFormProps> = ({ emailService, emailTemplate, emailU
       console.error('Error details:', JSON.stringify(error, null, 2));
       setSubmissionStatus('error');
     }
-      };
-  
+  };
+    
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,

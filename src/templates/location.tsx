@@ -53,6 +53,7 @@ export const config: TemplateConfig = {
       "c_yourEmailServiceId", 
       "c_yourEmailTemplateId", 
       "c_yourEmailUserId",
+      "c_toggleForm",
       "c_service1",
       "c_service2",
       "c_service3",
@@ -129,6 +130,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
 };
 
 
+
 const Location: Template<TemplateRenderProps> = ({
   __meta,
   relativePrefixToRoot,
@@ -153,6 +155,7 @@ const Location: Template<TemplateRenderProps> = ({
     c_toggleReviews,
     c_toggleServices,
     c_servicePhotos,
+    c_toggleForm,
     logo,
     id,
     c_font,
@@ -165,13 +168,14 @@ const Location: Template<TemplateRenderProps> = ({
     c_toggleHours,
     c_toggleContact,
     c_contactMessage,
-    yourEmailServiceId, 
-    yourEmailTemplateId, 
-    yourEmailUserId,
+    c_yourEmailServiceId, 
+    c_yourEmailTemplateId, 
+    c_yourEmailUserId,
+    
 
   } = document;
 
-  const data = { mainPhone, yourEmailServiceId, yourEmailTemplateId, yourEmailUserId, emails, logo, c_tagline, c_toggleAbout, c_toggleContact, c_toggleGallery, c_toggleHours, c_toggleReviews, c_toggleServices }
+  const data = { mainPhone, c_toggleForm, c_yourEmailServiceId, c_yourEmailTemplateId, c_yourEmailUserId, emails, logo, c_tagline, c_toggleAbout, c_toggleContact, c_toggleGallery, c_toggleHours, c_toggleReviews, c_toggleServices }
 
   return (
     <>
@@ -199,12 +203,13 @@ const Location: Template<TemplateRenderProps> = ({
           formattedPhone={mainPhone}
           hours={hours}
         ></LetsTalk>}
+        
         {c_toggleContact === true &&   <ContactSection address={address} phone={mainPhone} email={emails && emails.length > 0 ? emails[0] : null} latitude={geocodedCoordinate.latitude} longitude={geocodedCoordinate.longitude} contactmessage={c_contactMessage}/>}
-        <LeadForm
-      emailService={yourEmailServiceId}
-      emailTemplate={yourEmailTemplateId}
-      emailUserId={yourEmailUserId}
-    />
+        {c_toggleForm === true && <LeadForm
+      emailService={c_yourEmailServiceId}
+      emailTemplate={c_yourEmailTemplateId}
+      emailUserId={c_yourEmailUserId}
+    />}
         {c_toggleGallery === true && <Carousel title={"Gallery"} photoGallery={photoGallery}></Carousel>}
       </PageLayout>
       </div>
