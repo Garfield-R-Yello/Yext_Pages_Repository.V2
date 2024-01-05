@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
+import emailjs from 'emailjs-com';
 
-const LeadForm: React.FC = () => {
+interface LeadFormProps {
+  emailService: string;
+  emailTemplate: string;
+  emailUserId: string;
+}
+
+const LeadForm: React.FC<LeadFormProps> = ({ emailService, emailTemplate, emailUserId }) => {
   const [formData, setFormData] = useState({
     name: '',
     contactInfo: '',
@@ -9,25 +16,19 @@ const LeadForm: React.FC = () => {
 
   const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const apiUrl = 'https://formspree.io/f/xdorrylw'; // Replace with your Formspree form
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          contactInfo: formData.contactInfo,
-          description: formData.description,
-        }),
-      });
-
-      if (response.ok) {
+      const response = await emailjs.send(emailService, emailTemplate, {
+        name: formData.name,
+        contactInfo: formData.contactInfo,
+        description: formData.description,
+      }, emailUserId);
+  
+      console.log('Response from EmailJS:', response);
+  
+      if (response.status === 200) {
         setSubmissionStatus('success');
         setFormData({
           name: '',
@@ -39,10 +40,11 @@ const LeadForm: React.FC = () => {
       }
     } catch (error) {
       console.error('Error submitting form', error);
+      console.error('Error details:', JSON.stringify(error, null, 2));
       setSubmissionStatus('error');
     }
-  };
-
+      };
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,

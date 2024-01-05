@@ -80,10 +80,14 @@ const ContactSection = ({ address, phone, email, latitude, longitude, contactmes
                     <EnvelopeIcon className="h-7 w-6 text-gray-400" aria-hidden="true" />
                   </dt>
                   <dd>
-                    <a className="hover:text-gray-900" href="mailto:hello@example.com">
-                      {email[0]}
-                    </a>
-                  </dd>
+    {email && email.length > 0 ? (
+      <a className="hover:text-gray-900" href={`mailto:${email[0]}`}>
+        {email[0]}
+      </a>
+    ) : (
+      "No email available"
+    )}
+  </dd>
                   
                 </div>
                 

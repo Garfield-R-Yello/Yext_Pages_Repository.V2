@@ -50,6 +50,9 @@ export const config: TemplateConfig = {
       "c_service1Description",
       "c_service2Description",
       "c_service3Description",
+      "c_yourEmailServiceId", 
+      "c_yourEmailTemplateId", 
+      "c_yourEmailUserId",
       "c_service1",
       "c_service2",
       "c_service3",
@@ -161,18 +164,21 @@ const Location: Template<TemplateRenderProps> = ({
     c_reachOut,
     c_toggleHours,
     c_toggleContact,
-    c_contactMessage
+    c_contactMessage,
+    yourEmailServiceId, 
+    yourEmailTemplateId, 
+    yourEmailUserId,
 
   } = document;
 
-  const data = { mainPhone, emails, logo, c_tagline, c_toggleAbout, c_toggleContact, c_toggleGallery, c_toggleHours, c_toggleReviews, c_toggleServices }
+  const data = { mainPhone, yourEmailServiceId, yourEmailTemplateId, yourEmailUserId, emails, logo, c_tagline, c_toggleAbout, c_toggleContact, c_toggleGallery, c_toggleHours, c_toggleReviews, c_toggleServices }
 
   return (
     <>
       <Schema data={document} />
       <div style={{ fontFamily: c_font }}>
       <PageLayout data={data} templateData={{__meta, document}}>
-      {c_toggleAbout === true && <ServicesHero pageTitle={name} imageUrl={photoGallery[1].image.url} mainphone={mainPhone} email={emails} description={description} tagline={c_tagline}></ServicesHero>}
+      {c_toggleAbout === true && <ServicesHero pageTitle={name} imageUrl={photoGallery && photoGallery.length > 1 ? photoGallery[1].image.url : ""} mainphone={mainPhone} email={emails && emails.length > 0 ? emails[0] : null} description={description} tagline={c_tagline}></ServicesHero>}
         {/* <Banner name={name} tagline={c_tagline} photoGallery={photoGallery}/> */}
         {/* {c_toggleAbout === true && <About description={description} mainphone={mainPhone} email={emails} />} */}
         {c_toggleServices === true && c_servicePhotos && c_servicePhotos.length >= 3 && (
@@ -189,12 +195,16 @@ const Location: Template<TemplateRenderProps> = ({
         {c_toggleReviews === true && <Reviews entityid={id} title={"Reviews"}></Reviews>}
         {c_toggleHours === true && <LetsTalk
           description={c_reachOut}
-          emails={document.emails[0]}
+          emails={emails && emails.length > 0 ? emails[0] : null}
           formattedPhone={mainPhone}
           hours={hours}
         ></LetsTalk>}
-        {c_toggleContact === true && <ContactSection address={address} phone={mainPhone} email={emails} latitude={geocodedCoordinate.latitude} longitude={geocodedCoordinate.longitude} contactmessage={c_contactMessage}/>}
-        <LeadForm/>
+        {c_toggleContact === true &&   <ContactSection address={address} phone={mainPhone} email={emails && emails.length > 0 ? emails[0] : null} latitude={geocodedCoordinate.latitude} longitude={geocodedCoordinate.longitude} contactmessage={c_contactMessage}/>}
+        <LeadForm
+      emailService={yourEmailServiceId}
+      emailTemplate={yourEmailTemplateId}
+      emailUserId={yourEmailUserId}
+    />
         {c_toggleGallery === true && <Carousel title={"Gallery"} photoGallery={photoGallery}></Carousel>}
       </PageLayout>
       </div>
