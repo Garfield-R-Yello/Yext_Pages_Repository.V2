@@ -76,8 +76,7 @@ export const config: TemplateConfig = {
       "c_contactMessage"
     ],
     localization: {
-      locales: ["en"],
-      primary: false,
+      primary: true,
     },
     transform: {
       replaceOptionValuesWithDisplayNames: [
