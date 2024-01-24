@@ -202,7 +202,7 @@ const Location: Template<TemplateRenderProps> = ({
           hours={hours}
         ></LetsTalk>}
         
-        {c_toggleContact === true &&   <ContactSection address={address} phone={mainPhone} email={emails && emails.length > 0 ? emails[0] : null} latitude={geocodedCoordinate.latitude} longitude={geocodedCoordinate.longitude} contactmessage={c_contactMessage}/>}
+        {c_toggleContact === true &&   <ContactSection address={address} phone={mainPhone} email={emails && emails.length > 0 ? emails[0] : null} latitude={yextDisplayCoordinate.latitude} longitude={yextDisplayCoordinate.longitude} contactmessage={c_contactMessage}/>}
         {c_toggleForm === true && <LeadForm
       emailService={c_yourEmailServiceId}
       emailTemplate={c_yourEmailTemplateId}
