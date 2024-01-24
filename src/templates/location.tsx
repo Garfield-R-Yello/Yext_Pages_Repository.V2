@@ -88,9 +88,8 @@ export const config: TemplateConfig = {
 };
 
 
-
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  return document.slug;
+  return document.slug ? document.slug : 'index.html';
 };
 
 
