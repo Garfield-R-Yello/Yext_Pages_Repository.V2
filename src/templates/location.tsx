@@ -183,15 +183,15 @@ const Location: Template<TemplateRenderProps> = ({
       {c_toggleAbout === true && <ServicesHero pageTitle={name} imageUrl={photoGallery && photoGallery.length > 1 ? photoGallery[1].image.url : ""} mainphone={mainPhone} email={emails && emails.length > 0 ? emails[0] : null} description={description} tagline={c_tagline}></ServicesHero>}
         {/* <Banner name={name} tagline={c_tagline} photoGallery={photoGallery}/> */}
         {/* {c_toggleAbout === true && <About description={description} mainphone={mainPhone} email={emails} />} */}
-        {c_toggleServices === true && c_servicePhotos && c_servicePhotos.length >= 3 && (
+        {c_toggleServices === true && c_servicePhotos && (
           <FeaturesZigzag
             title={"Services"}
             service1={c_service1} service1desc={c_service1Description}
-            service1photo={c_servicePhotos[0].url}
+            service1photo={c_servicePhotos[0]?.url}
             service2={c_service2} service2desc={c_service2Description}
-            service2photo={c_servicePhotos[1].url}
+            service2photo={c_servicePhotos[1]?.url}
             service3={c_service3} service3desc={c_service3Description}
-            service3photo={c_servicePhotos[2].url}
+            service3photo={c_servicePhotos[2]?.url}
           />
         )}
         {c_toggleReviews === true && <Reviews entityid={id} title={"Reviews"}></Reviews>}
